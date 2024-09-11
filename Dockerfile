@@ -6,7 +6,7 @@ ARG NUGET_USERNAME
 ARG NUGET_TOKEN
 ARG version
 
-COPY ["School.Project.Systems.Services.Registry/School.Project.Systems.Services.Identity.csproj", "School.Project.Systems.Services.Registry/"]
+COPY ["School.Project.Systems.Services.Registry/School.Project.Systems.Services.Registry.csproj", "School.Project.Systems.Services.Registry/"]
 COPY ["NuGet.config", "School.Project.Systems.Services.Registry/"]
 
 RUN dotnet restore "School.Project.Systems.Services.Registry/School.Project.Systems.Services.Registry.csproj" --configfile School.Project.Systems.Services.Registry/NuGet.config
