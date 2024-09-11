@@ -48,7 +48,7 @@ public class ServerRegistry : IServerRegistry
         
         _logger.LogInformation("Server successfully registered with information {information}", entity.ToString());
 
-        return new(entity.Id, entity.Capacity, entity.Current);
+        return new(entity.Id, entity.Address, entity.Port, entity.Capacity, entity.Current);
     }
 
     public Task<List<ServerDTO>> GetAll()
