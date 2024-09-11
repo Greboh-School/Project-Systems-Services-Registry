@@ -122,7 +122,7 @@ public static class IMemoryCacheRepository
         players!.Remove(entity);
 
         var servers = cache.GetOrCreateServers().Result;
-        servers.First(x => x.Id == entity.ServerId).Capacity--;
+        servers.First(x => x.Id == entity.ServerId).Current--;
 
         cache.Set(SERVER_KEY, servers);
         cache.Set(PLAYER_KEY, players);
