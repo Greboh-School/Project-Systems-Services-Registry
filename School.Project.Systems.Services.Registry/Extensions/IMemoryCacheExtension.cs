@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using School.Project.Systems.Services.Registry.Models.Entities;
-using School.Shared.Core.Abstractions.Exceptions;
 
 namespace School.Project.Systems.Services.Registry.Extensions;
 
@@ -128,5 +127,33 @@ public static class IMemoryCacheRepository
         cache.Set(PLAYER_KEY, players);
 
         return Task.CompletedTask;
+    }
+
+    public static bool TryGetPlayerById(this IMemoryCache cache, Guid id, out PlayerEntity? player)
+    {
+        var result = cache.TryGetValue(PLAYER_KEY, out List<PlayerEntity>? players);
+
+        if (!result)
+        {
+            player = null;
+            return false;
+        }
+        
+        player = players!.FirstOrDefault(x => x.UserId == id);
+        return player is not null;
+    }
+    
+    public static bool TryGetPlayerByUsername(this IMemoryCache cache, string username, out PlayerEntity? player)
+    {
+        var result = cache.TryGetValue(PLAYER_KEY, out List<PlayerEntity>? players);
+
+        if (!result)
+        {
+            player = null;
+            return false;
+        }
+        
+        player = players!.FirstOrDefault(x => x.UserName == username);
+        return player is not null;
     }
 }

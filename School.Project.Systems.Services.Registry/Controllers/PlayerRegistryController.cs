@@ -56,9 +56,9 @@ public class PlayerRegistryController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PlayerDTO))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     // [Authorize("game:user")]
-    public async Task<ActionResult<PlayerDTO>> Get([FromRoute] Guid id)
+    public ActionResult<PlayerDTO> Get([FromRoute] Guid id)
     {
-        var result = await _playerRegistry.Get(id);
+        var result = _playerRegistry.Get(id);
         
         return Ok(result);
     }    

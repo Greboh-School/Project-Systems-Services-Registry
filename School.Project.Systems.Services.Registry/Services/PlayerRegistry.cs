@@ -13,7 +13,7 @@ public interface IPlayerRegistry
     public Task<PlayerDTO> Create(PlayerConnectRequest request);
     public Task<PlayerDTO> CreateWithServerId(Guid serverId, PlayerConnectRequest request);
     public Task<List<PlayerDTO>> GetAll();
-    public Task<PlayerDTO> Get(Guid id);
+    public PlayerDTO Get(Guid id);
     public Task<PlayerDTO> GetByUserName(string userName);
     public Task Delete(Guid id);
 }
@@ -85,7 +85,7 @@ public class PlayerRegistry : IPlayerRegistry
     }
 
 
-    public Task<PlayerDTO> Get(Guid id)
+    public PlayerDTO Get(Guid id)
     {
         var entity = _cache.Get<List<PlayerEntity>>(IMemoryCacheRepository.PLAYER_KEY)?.FirstOrDefault(x => x.UserId == id);
 
@@ -97,7 +97,7 @@ public class PlayerRegistry : IPlayerRegistry
 
         var dto = entity.Adapt<PlayerDTO>();
 
-        return Task.FromResult(dto);
+        return dto;
     }
     public Task<PlayerDTO> GetByUserName(string userName)
     {
